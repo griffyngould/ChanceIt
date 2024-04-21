@@ -5,35 +5,40 @@ class Player
 {
 public:
     Player();
-    int TakeTurn();
-    int Score() const;
-    virtual std::string Name() const = 0;
+    Player(std::string name);
+    int TakeTurn(int opponentsLastRoll);
+    int GetScore() const;
+    virtual std::string GetName() const;
+    void SetName(std::string name);
+    int GetOppRoll() const;
     int myFirstRoll, myCurrentRoll;
 protected:
     void RaiseScore(int howMuch);
-    // virtual void UpdateData(int oppLastRoll) = 0;
+    virtual void UpdateData(int oppLastRoll);
     virtual bool StopRolling() const = 0;
+
 private:
     RandomInt die1, die2;
+    int score, oppScore, oppRoll;
+    std::string name;
+};
+
+class Player1 : public Player
+{
+
+    public:
+    Player1();
+    Player1(std::string name);
+    bool StopRolling() const;
+    
 };
 
 class Player2 : public Player
 {
-public:
+    public:
+
     Player2();
-    std::string Name() const;
-
-protected:
-    // void UpdateData(int oppLastRoll);
+    Player2(std::string name);
     bool StopRolling() const;
+
 };
-class Player1 : public Player
-{
-public:
-    Player1();
-    std::string Name() const;
-
-protected:
-    // void UpdateData(int oppLastRoll);
-    bool StopRolling() const;
-}
